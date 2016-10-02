@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Muzix</string>
+    <string name="example">Example</string>
+    <string name="time_example">time example</string>
+    <string name="play">Play</string>
+    <string name="dislike">Dislike</string>
+    <string name="like">Like</string>
+    <string name="next">Next</string>
+    <string name="prev">Prev</string>
+    <string name="album">Album</string>
+    <string name="title">Title</string>
+    <string name="artist">artist</string>
+    <string name="back">back</string>
+    <string name="list">List</string>
+    <string name="more">more</string>
+    <string name="divider">divider</string>
+    <string name="drag_handler">drag handler</string>
+    <string name="no_item">No item</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="tracks">Tracks</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="playlist">Playlist</string>
+    <string name="setting">Setting</string>
+    <string name="title_underline"><![CDATA[<u>Title</u>]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

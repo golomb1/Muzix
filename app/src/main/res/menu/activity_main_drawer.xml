@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_track"
+            android:icon="@drawable/ic_audiotrack_black_24dp"
+            android:title="@string/tracks" />
+        <item
+            android:id="@+id/nav_albums"
+            android:icon="@drawable/ic_album_black_24dp"
+            android:title="@string/albums"/>
+        <item
+            android:id="@+id/nav_artist"
+            android:icon="@drawable/ic_recent_actors_black_24dp"
+            android:title="@string/artists" />
+        <item
+            android:id="@+id/nav_playlist"
+            android:icon="@drawable/ic_queue_music_black_24dp"
+            android:title="@string/playlist" />
+    </group>
+
+    <item android:title="@string/setting">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>
