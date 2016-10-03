@@ -47,7 +47,7 @@
         android:layout_toStartOf="@+id/space_drag_holder"
         android:layout_toLeftOf="@+id/space_drag_holder"
         android:layout_height="wrap_content"
-        android:singleLine="true"
+        android:lines="1"
         android:ellipsize="marquee"
         android:focusable="true"
         android:scrollHorizontally="true"
