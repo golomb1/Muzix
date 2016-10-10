@@ -7,15 +7,20 @@ import android.support.annotation.NonNull;
  * Represent a muzix entity.
  */
 public abstract class MuzixEntity implements Comparable<MuzixEntity> {
+
+    public static long PLAYLIST = -1;
+
     protected long id;
     protected String title;
-    protected int duration;
+    private int duration;
+    private String artist;
 
 
-    public MuzixEntity(long id, String title, int duration) {
+    public MuzixEntity(long id, String title, int duration, String artist) {
         this.id = id;
         this.title = title;
         this.duration = duration;
+        this.artist = artist;
     }
 
     public void setId(long id) {
@@ -28,6 +33,14 @@ public abstract class MuzixEntity implements Comparable<MuzixEntity> {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public long getId() {

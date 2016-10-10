@@ -8,7 +8,7 @@
     tools:context="com.apps.golomb.muzix.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <com.apps.golomb.muzix.ExtendedRecycleView.ExtendedRecycleView
+    <com.libs.golomb.extendedrecyclerview.ExtendedRecycleView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"/>

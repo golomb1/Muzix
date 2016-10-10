@@ -16,6 +16,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -28,17 +29,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 
-import com.apps.golomb.muzix.ExtendedRecycleView.ExtendedRecycleAdapter;
-import com.apps.golomb.muzix.ExtendedRecycleView.ExtendedRecycleView;
 import com.apps.golomb.muzix.data.MuzixSong;
+import com.apps.golomb.muzix.data.Playlist;
 import com.apps.golomb.muzix.mediaplayer.MusicService;
 import com.apps.golomb.muzix.wigets.MuzixListDataExtractor;
+import com.apps.golomb.muzix.wigets.MuzixListViewHolderGenerator;
 import com.apps.golomb.muzix.wigets.MuzixViewHolderGenerator;
+import com.libs.golomb.extendedrecyclerview.DataExtractor.SectionListDataExtractor;
+import com.libs.golomb.extendedrecyclerview.DataExtractor.SimpleListDataExtractor;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.apps.golomb.muzix.data.MuzixEntity.PLAYLIST;
 
 
 /***
@@ -52,13 +59,16 @@ import java.util.List;
  */
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SlidingUpPanelLayout.PanelSlideListener, ExtendedRecycleAdapter.OnClickListener<MuzixSong> {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        SlidingUpPanelLayout.PanelSlideListener,
+        ExtendedRecycleAdapter.OnClickListener<MuzixSong>{
 
 
     private static final int READ_EXTERNAL_STORAGE_ALL_TRACKS = 0;
     private DrawerLayout mDrawer;
     private SlidingUpPanelLayout mSlidingUpPanelLayout;
-    private ExtendedRecycleAdapter<MuzixSong, com.apps.golomb.muzix.ExtendedRecycleView.ExtendedViewHolder<MuzixSong>> mAdapter;
+    private ExtendedRecycleAdapter<MuzixSong> mSongsAdapter;
+    private ExtendedRecycleAdapter<Playlist> mPlaylistAdapter;
 
     private ImageButton mPlaySlide;
     private PlayerLayout mPlayer;
@@ -70,11 +80,7 @@ public class MainActivity extends AppCompatActivity
 
     // flag to indicate that the activity is connected to the service
     private boolean musicBound=false;
-
-
-
-
-
+    private ExtendedRecycleView mRecyclerView;
 
 
     @Override
@@ -82,6 +88,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /* sliding panel */
         mSlidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         mSlidingUpPanelLayout.addPanelSlideListener(this);
 
@@ -110,9 +117,27 @@ public class MainActivity extends AppCompatActivity
 
         // The Content
 
-        ExtendedRecycleView mRecyclerView = (ExtendedRecycleView) findViewById(R.id.recycler_view);
-        mAdapter = new ExtendedRecycleAdapter<>(new MuzixListDataExtractor(new ArrayList<MuzixSong>(),false,true), new MuzixViewHolderGenerator(this), this);
-        mRecyclerView.initializeDefault(this, LinearLayoutManager.VERTICAL, mAdapter);
+        mRecyclerView = (ExtendedRecycleView) findViewById(R.id.recycler_view);
+        mSongsAdapter = new ExtendedRecycleAdapter<>(new SimpleListDataExtractor<>(new ArrayList<MuzixSong>(), false, true), new MuzixViewHolderGenerator(this), this);
+        mPlaylistAdapter = new ExtendedRecycleAdapter<>(new SimpleListDataExtractor<>(new ArrayList<Playlist>(), false, true),
+                new MuzixListViewHolderGenerator(this),
+                new ExtendedRecycleAdapter.OnClickListener<Playlist>() {
+                    @Override
+                    public void onClick(View view, Playlist item) {
+                        // TODO - switch to list view
+                    }
+                });
+        final GridLayoutManager manager = new GridLayoutManager(this, 3);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if ( (mPlaylistAdapter.hasHeader() && mPlaylistAdapter.isHeader(position)) ||
+                        mPlaylistAdapter.hasFooter() && mPlaylistAdapter.isFooter(position) )
+                    return manager.getSpanCount();
+                return 1;
+            }
+        });
+        mRecyclerView.initializeDefault(this, LinearLayoutManager.VERTICAL, mSongsAdapter);
 
         mPlayer = new PlayerLayout(this);
         mPlayer.setController(this,mRecyclerView);
@@ -223,7 +248,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_artist) {
 
         } else if (id == R.id.nav_playlist) {
-
+            libraryMode();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -236,7 +261,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * TODO -- what to do in cas of null
+     * TODO -- what to do in case of null
      * TODO    The way that the list is being sort.
      * when a playlist is selected, prepare akk the relevant classes on the current list.
      * @param muzixSongList - the list that was selected.
@@ -244,14 +269,35 @@ public class MainActivity extends AppCompatActivity
     public void playlistSelected(List<MuzixSong> muzixSongList){
         if (muzixSongList != null) {
             Collections.sort(muzixSongList);
-            mAdapter.update(new MuzixListDataExtractor(muzixSongList,true,true));
-            mAdapter.notifyDataSetChanged();
+            mRecyclerView.setDefaultLayoutManager();
+            mSongsAdapter.update(new SectionListDataExtractor<>(muzixSongList, false, true));
+            mRecyclerView.getAdapter().notifyItemRangeRemoved(0,mRecyclerView.getAdapter().getItemCount());
+            mRecyclerView.swapAdapter(mSongsAdapter,true);
+            mSongsAdapter.notifyDataSetChanged();
             if(musicSrv != null && musicBound) {
                 musicSrv.setList(muzixSongList);
             }
         }
     }
 
+
+    public List<Playlist> getAllPlaylists() {
+        List<Playlist> playlist = new ArrayList<>();
+        for(int i = 0; i < 100; i ++){
+            playlist.add(new Playlist(PLAYLIST,"Playlist "+ i, 0, " Me"));
+        }
+        return playlist;
+    }
+
+    public void libraryMode(){
+        // TODO
+        List<Playlist> list = getAllPlaylists();
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        mPlaylistAdapter.update(new SimpleListDataExtractor<>(list,false,true));
+        mRecyclerView.getAdapter().notifyItemRangeRemoved(0,mRecyclerView.getAdapter().getItemCount());
+        mRecyclerView.swapAdapter(mPlaylistAdapter,true);
+        mPlaylistAdapter.notifyDataSetChanged();
+    }
 
     /**
      * TODO - play music file, the music file can be either in the current list being viewed, or the list being heard.
@@ -419,8 +465,6 @@ public class MainActivity extends AppCompatActivity
             mPlaySlide.setVisibility(View.VISIBLE);
         }
     }
-
-
 
 
 }

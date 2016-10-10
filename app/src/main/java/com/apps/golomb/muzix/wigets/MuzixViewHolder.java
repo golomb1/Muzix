@@ -4,11 +4,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apps.golomb.muzix.ExtendedRecycleView.ExtendedRecycleAdapter;
-import com.apps.golomb.muzix.ExtendedRecycleView.ExtendedViewHolder;
 import com.apps.golomb.muzix.R;
 import com.apps.golomb.muzix.data.MuzixSong;
 import com.apps.golomb.muzix.utils.Utils;
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 
 /**
  * Created by golomb on 22/07/2016.
@@ -51,6 +52,11 @@ public class MuzixViewHolder extends ExtendedViewHolder<MuzixSong> {
     @Override
     public int getType() {
         return type;
+    }
+
+    @Override
+    public void bind(DataExtractor<MuzixSong, ExtendedViewHolder<MuzixSong>> mDataExtractor, int position, int itemType) {
+        bind(mDataExtractor.getAt(position));
     }
 
     public void setType(int type) {
