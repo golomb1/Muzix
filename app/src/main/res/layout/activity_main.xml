@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
-
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:sothree="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sliding_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="bottom"
-    sothree:umanoPanelHeight="?attr/actionBarSize"
-    sothree:umanoShadowHeight="4dp">
+    android:background="@color/colorPrimary">
 
-    <include
-        layout="@layout/activity_main_content"
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="?attr/actionBarSize"
+        sothree:umanoScrollableView="@+id/current_list"
+        sothree:umanoShadowHeight="4dp">
 
-    <include
-        layout="@layout/player"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+        <include
+            layout="@layout/activity_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        <com.apps.golomb.muzix.PlayerLayout
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 </RelativeLayout>

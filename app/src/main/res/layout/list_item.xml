@@ -1,80 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
+    android:background="@drawable/selector_item_light"
     android:clickable="true"
-    android:background="@drawable/ripple_bg">
+    android:foreground="?attr/selectableItemBackgroundBorderless">
 
     <ImageView
-        android:id="@+id/album"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:contentDescription="@string/album"
-        android:src="@drawable/default_album"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"/>
-
-    <TextView
-        android:layout_marginTop="10dp"
-        android:id="@+id/item_title"
+        android:id="@+id/rear_right_view"
+        android:background="@color/defaultColor"
         android:layout_width="match_parent"
-        android:textSize="18sp"
-        android:layout_toEndOf="@+id/album"
-        android:layout_toRightOf="@+id/album"
-        android:layout_toStartOf="@+id/space_drag_holder"
-        android:layout_toLeftOf="@+id/space_drag_holder"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:focusable="true"
-        android:ellipsize="marquee"
-        android:scrollHorizontally="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:text="@string/example"/>
-
-    <TextView
-        android:id="@+id/item_details"
-        android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_centerVertical="true"
-        android:textSize="12sp"
-        android:layout_below="@+id/item_title"
-        android:layout_toEndOf="@+id/album"
-        android:layout_toRightOf="@+id/album"
-        android:layout_toStartOf="@+id/space_drag_holder"
-        android:layout_toLeftOf="@+id/space_drag_holder"
-        android:layout_height="wrap_content"
-        android:lines="1"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:scrollHorizontally="true"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:text="@string/example"/>
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp"
+        android:paddingEnd="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:contentDescription="@string/delete"
+        android:scaleType="fitEnd"
+        android:src="@drawable/ic_delete_black_24dp" />
 
     <ImageView
-        android:id="@+id/drag_holder"
-        android:src="@drawable/ic_reorder_black_24dp"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/drag_handler" />
+        android:id="@+id/rear_left_view"
+        android:background="@color/defaultColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="5dp"
+        android:paddingEnd="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingStart="15dp"
+        android:paddingTop="5dp"
+        android:contentDescription="@string/delete"
+        android:scaleType="fitStart"
+        android:src="@drawable/ic_delete_black_24dp" />
 
-    <Space
-        android:id="@+id/space_drag_holder"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true" />
+    <RelativeLayout
+        android:id="@+id/front_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_item_light"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+            android:id="@+id/drag_holder"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/drag_handler"
+            android:src="@drawable/ic_reorder_black_24dp" />
+
+        <ImageView
+            android:id="@+id/album"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/drag_holder"
+            android:layout_toRightOf="@+id/drag_holder"
+            android:contentDescription="@string/album"
+            android:src="@drawable/default_album" />
+
+        <RelativeLayout
+            android:layout_alignStart="@+id/album"
+            android:layout_alignLeft="@+id/album"
+            android:layout_alignEnd="@+id/album"
+            android:layout_alignRight="@+id/album"
+            android:id="@+id/icon_view"
+            android:layout_width="52dp"
+            android:layout_height="17dp"
+            android:layout_alignBottom="@+id/album">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/selected_number"
+                android:src="@color/selectedBackground" />
+
+            <com.apps.golomb.muzix.customviews.FlipAutoResizeTextView
+                android:id="@+id/selection_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/example"
+                android:textAlignment="center"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/album"
+            android:layout_toLeftOf="@+id/space_drag_holder"
+            android:layout_toRightOf="@+id/album"
+            android:layout_toStartOf="@+id/space_drag_holder"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text="@string/example"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/item_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_title"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/album"
+            android:layout_toLeftOf="@+id/space_drag_holder"
+            android:layout_toRightOf="@+id/album"
+            android:layout_toStartOf="@+id/space_drag_holder"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:text="@string/example"
+            android:textSize="12sp" />
+
+        <ImageButton
+            android:id="@+id/more"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/drag_handler"
+            android:src="@drawable/ic_more_vert_black_12dp" />
+
+        <Space
+            android:id="@+id/space_drag_holder"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:duration="@integer/morphing_time"
+        android:propertyName="pathData"
+        android:valueFrom=" M2,11  L19,11 v2 h-17
+                            M2,7  L19,7 v2 h-17
+                            M2,17  h13 v-2 L2,15 v2z
+                            M17,15 v6 L22,18,22,18z"
+        android:valueTo="M11,14 L13,14 v-7 h-2
+                         M11,13 L5,13 v2 h6
+                         M13,13 h6 v2 L13,15 v2z
+                         M13,14 v7 L11,21,11,14z"
+        android:valueType="pathType" />
+</set>

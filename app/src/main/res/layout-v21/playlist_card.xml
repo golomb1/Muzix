@@ -9,6 +9,7 @@
     card_view:cardElevation="2dp"
     android:layout_marginStart="5dp"
     android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dp"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground">
 
@@ -23,14 +24,35 @@
             android:contentDescription="@string/album"
             android:src="@drawable/default_album" />
 
+        <RelativeLayout
+            android:id="@+id/icon_view"
+            android:layout_alignStart="@+id/album_image"
+            android:layout_alignEnd="@+id/album_image"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@+id/album_image"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/selected_number"
+                android:src="@color/selectedBackground" />
+
+            <com.apps.golomb.muzix.customviews.FlipAutoResizeTextView
+                android:id="@+id/selection_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/example"
+                android:textAlignment="center"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/album_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_toRightOf="@+id/more"
             android:layout_toEndOf="@+id/more"
             android:layout_marginTop="5dp"
             android:layout_below="@+id/album_image"

@@ -5,6 +5,7 @@ import android.widget.MediaController;
 
 /**
  * Created by tomer on 08/09/2016.
+ * This class was made in order to override the media controller for the sake of the media player.
  */
 public class MusicController  extends MediaController {
 

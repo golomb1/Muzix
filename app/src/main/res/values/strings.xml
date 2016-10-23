@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Muzix</string>
     <string name="example">Example</string>
-    <string name="time_example">time example</string>
+    <string name="time_example">0:00</string>
     <string name="play">Play</string>
     <string name="dislike">Dislike</string>
     <string name="like">Like</string>
@@ -33,4 +33,37 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="action_selected_one">%1$s selected</string>
+    <string name="action_selected_many">%1$s selected</string>
+
+    <string name="action_delete">Delete</string>
+    <string name="action_select_all">Select All</string>
+    <string name="item_selected">Item selected</string>
+    <string name="selected_number">selected_number</string>
+    <string name="first_view">First View</string>
+    <string name="back_view">Back View</string>
+    <string name="play_now">Play Now</string>
+    <string name="play_after">Play After</string>
+    <string name="append_to_list">Append to list</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search Songs</string>
+    <string name="delete">Delete</string>
+    <string name="banner">Banner</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="save_list">Save List</string>
+    <string name="notice_removed">Item was removed</string>
+    <string name="action_undo">Undo</string>
+    <string name="remove">Remove</string>
+    <string name="name">Name</string>
+    <string name="details">Details</string>
+    <string name="create_a_new_playlist">Create a new Playlist</string>
+    <string name="header_background">header_background</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_list">Select a list</string>
+    <string name="item_color">item color</string>
+    <string name="notice_moved">Item was moved</string>
 </resources>

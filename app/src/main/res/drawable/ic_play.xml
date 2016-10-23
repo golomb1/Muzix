@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="58dp"
+    android:height="58dp"
+    android:viewportWidth="24.0"
+    android:viewportHeight="24.0">
+    <path
+        android:name="play"
+        android:fillColor="@color/colorPrimary"
+        android:pathData="M  8,5 h0 v7 L19,12 L19,12z
+                          M 8,19 h0 v-7 L19,12 L19,12z"/>
+</vector>

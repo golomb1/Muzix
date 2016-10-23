@@ -1,7 +1,7 @@
 package com.apps.golomb.muzix.mediaplayer;
 
 import android.media.MediaPlayer;
-import com.orhanobut.logger.Logger;
+import android.util.Log;
 import org.greenrobot.eventbus.EventBus;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -13,10 +13,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 class MediaObserver implements Runnable {
     private MediaPlayer player;
     private AtomicBoolean isRunning = new AtomicBoolean(false);
+    private EventBus eventBus;
 
-
-    MediaObserver(MediaPlayer player){
+    MediaObserver(MediaPlayer player, EventBus eventBus){
         this.player = player;
+        this.eventBus = eventBus;
     }
 
     void stop() {
@@ -31,23 +32,23 @@ class MediaObserver implements Runnable {
     }
 
     @Override public void run() {
-        Logger.d("Observer Start Running");
+        Log.d("TGolomb","Observer Start Running");
         while (!isRunning.get()) {
             try {
                 if (player.isPlaying())
-                    sendMsgToUI(player.getCurrentPosition(),
-                            player.getDuration());
+                    sendMsgToUI(player.getCurrentPosition()
+                    );
             } catch (Exception e){e.printStackTrace();}
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) { e.printStackTrace(); }
         }
-        Logger.d("Observer stop Running");
+        Log.d("TGolomb","Observer stop Running");
     }
 
     //handles all the background threads things for you
-    private void sendMsgToUI(int position, int duration) {
-        MediaPlayerProgressEvent event = new MediaPlayerProgressEvent(position,duration);
-        EventBus.getDefault().post(event);
+    private void sendMsgToUI(int position) {
+        MediaPlayerProgressEvent event = new MediaPlayerProgressEvent(position);
+        eventBus.post(event);
     }
 }

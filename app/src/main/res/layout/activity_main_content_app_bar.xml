@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drawer_background"
+    tools:context="com.apps.golomb.muzix.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <ru.shmakinv.android.material.widget.GpCollapsingToolbar
+            android:id="@+id/gp_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:gp_marketStyledBehaviour="true"
+            app:gp_contentScrim="@color/colorPrimary"
+            app:gp_scrimAnimationDuration="1000"
+            app:layout_scrollInterpolator="@android:anim/linear_interpolator"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:gp_statusBarScrim="@color/colorPrimaryDark"
+            app:toolbarId="@+id/toolbar">
+
+            <include
+                android:id="@+id/play_list_header"
+                layout="@layout/playlist_header2"/>
+
+            <ImageView
+                app:layout_collapseMode="pin"
+                android:id="@+id/space"
+                android:background="@color/mask"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:contentDescription="@null" />
+
+            <android.support.v7.widget.Toolbar
+                app:layout_collapseMode="pin"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </ru.shmakinv.android.material.widget.GpCollapsingToolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/activity_main_content_main" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_play_arrow_white" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/fab"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_playlist_play_as_next"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/fab2"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_playlist_add_white"
+            android:visibility="invisible" />
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

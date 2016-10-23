@@ -7,17 +7,10 @@ package com.apps.golomb.muzix.mediaplayer;
 
 public class MediaPlayerProgressEvent {
     private int position;
-    private int duration;
 
-    public MediaPlayerProgressEvent(int position, int duration) {
+    MediaPlayerProgressEvent(int position) {
         this.position = position;
-        this.duration = duration;
     }
-
-    public int getDuration(){
-        return duration;
-    }
-
     public int getPosition() {
         return position;
     }
